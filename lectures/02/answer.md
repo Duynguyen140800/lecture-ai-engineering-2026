@@ -31,7 +31,6 @@
         | Format compliance | 9.52% | 100% |
         | Content accuracy | 0% | 100% (21/21) |
         | Evaluation time | 21.6 s | 33.9 s |
-
         Training took 216 seconds over 40 steps and 20 epochs with training loss: 0.016774. No test failures remained, regression list was empty. In Section 6, the speaker-name and certificate-condition questions changed from `format_error` to `needs_review`. However, the workshop-ending-time question change from `format_error` to `asserted` it answered with the registration deadline and registration-deadline control became a correct supported answer.
         Insight: 100% scored described this particular 21 questions test set. It also did not establish reliable handling of every unsupported question. The separate probe exposed confusion between event's ending time and its registration deadline
     Advanced level:
@@ -50,8 +49,4 @@
         | Total generation time, 15 questions | 161.509 s | 277.383 s |
         | Outputs reaching the 256-token limit | 15/15 | 15/15 |
         The reported weight-memory footprint decreased by approximately 74.8%. It run took approximately 1.72 times as long as the 32-bit run. Moreover, outputs changed without additional training.
-- ファインチューニングが向く場面・向かない場面についての考察：For me, the experiments suggests that fine-tuning is useful to teach a consistent output format, wording, or response style. In the FAQ baseline, LoRA increase JSON formats compliance from 9.52% to 100%. In the glossary experiment, the model reproduced all six directly requested definitions verbatim and generated much shorter answers.
-
-However, fine-tuning can be less reliable with reworded or required recognizing questions that the available information did not support an answer. These results show recalling training examples does not guarantee flexible understanding.
-
-I prefer a system that searches the glossary, displays the relevant entry for frequently changing information. Retrieval needs evaluation because it can miss or select the wrong information. Fine-tuning could complement retrieval by improving response format and style.
+- ファインチューニングが向く場面・向かない場面についての考察：For me, the experiments suggests that fine-tuning is useful to teach a consistent output format, wording, or response style. In the FAQ baseline, LoRA increase JSON formats compliance from 9.52% to 100%. In the glossary experiment, the model reproduced all six directly requested definitions verbatim and generated much shorter answers. However, fine-tuning can be less reliable with reworded or required recognizing questions that the available information did not support an answer. These results show recalling training examples does not guarantee flexible understanding. I prefer a system that searches the glossary, displays the relevant entry for frequently changing information. Retrieval needs evaluation because it can miss or select the wrong information. Fine-tuning could complement retrieval by improving response format and style.
