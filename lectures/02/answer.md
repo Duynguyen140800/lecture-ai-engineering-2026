@@ -2,14 +2,14 @@
 
 ## 演習
 
-- 使ったモデル・設定（`result.json` の `config` から）：
-- 自分で学習を実行したか（`executed_training_myself`）：はい / いいえ（実行できた範囲：　）
-- 学習前：`format_rate` =　 / `content_rate` =　
-- 学習後：`format_rate` =　 / `content_rate` =　
-- 退行した質問：
-- 学習後に残った失敗と、その型（根拠なしの質問に断定した / 根拠ありの質問に確認要求で逃げた / 形式の崩れ）：
-- 知識を問う質問（セクション 6）の結果（学習前の分類 → 学習後の分類）と気づいたこと：
-- 学習で変わったこと・変わらなかったこと：
+- 使ったモデル・設定（`result.json` の `config` から）：Model: Qwen/Qwen3.5-0.8B; revision: 2fc06364715b967f1860aea9cf38778875588b17. Setting: LoRA without quantization, seed 42, 20 training epochs, learning rate 0.0002, 6 warmup steps, LoRA rank 16, LoRA alpha 32, maximum sequence length 512, and maximum output length 96 tokens. Generation used do_sample=False.
+- 自分で学習を実行したか（`executed_training_myself`）：はい / いいえ（実行できた範囲：Yes, I executed model loading, pre-training/ post training evaluation, LoRA training, the training completed in 228s, 40 steps and 20 epochs
+- 学習前：`format_rate` =　0.095238 (9.52%, 2/21) / `content_rate` =　0.0 (0%,0/21)
+- 学習後：`format_rate` =　1.0 (100%, 21/21) / `content_rate` =　0.904762 (90.48%, 19/21)
+- 退行した質問：None
+- 学習後に残った失敗と、その型（根拠なしの質問に断定した / 根拠ありの質問に確認要求で逃げた / 形式の崩れ）：Two failures remained. For “When will grades be released?”, the model returned the PDF submission-format rule with needs_review: false, although the FAQ did not specify a grade-release date. For “Is an advance booking required for office hours?”, the model returned the office-hour schedule with needs_review: false, although the FAQ did not specify a booking requirement.
+- 知識を問う質問（セクション 6）の結果（学習前の分類 → 学習後の分類）と気づいたこと：Final assignment deadline: format_error => asserted. The model reused the ordinary assignment deadline without evidence that it also applied to the final assignment. Instructor’s name: format_error => needs_review. It appropriately requested confirmation. Next lecture’s topic: format_error => needs_review. It appropriately requested confirmation. Ordinary assignment deadline, the supported control: format_error => asserted. It correctly answered using the FAQ. I realized that the original FAQ marked incorrectly the control questions as false because it checked exact-question membership in gold.
+- 学習で変わったこと・変わらなかったこと：LoRA improves JSON compliance and reproduce FAQ wording. Answers omitted needs_review before training is followed the required format. The 0% content score reflected missing required fields. The model substituted a related FAQ fact for information that was not provided. Training improved format and measured content accuracy but did not guarantee reliable judgment about whether the FAQ supported an answer.
 
 ## 宿題
 
